@@ -1,7 +1,7 @@
 ## Kafka-http ##
 To allow user insert message into Kafka topic. You could choose the best image as needs.
 
-2. [Kafka-http](https://github.com/cutejaneii/kafka-http/tree/master/kafka-http)
+1. [Kafka-http](https://github.com/cutejaneii/kafka-http/tree/master/kafka-http)
 
 The kafka broker list need to be given when execute "docker run" command.
 
