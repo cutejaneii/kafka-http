@@ -6,4 +6,4 @@ ENV PATH=$PATH:/
 
 WORKDIR /
 
-CMD ["kafka-http"]
+CMD ["/kafka-http"]
