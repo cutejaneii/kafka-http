@@ -1,6 +1,12 @@
-FROM alpine:3.4
+# build stage
+FROM golang:alpine AS build-env
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
+RUN go get github.com/Shopify/sarama
+ADD . /src
+RUN cd /src && CGO_ENABLED=0 GOOS=linux go build -o kafka-http
 
-ADD kafka-http-config /
-ADD config /
-
-CMD ["./kafka-http"]
+# final stage
+FROM centurylink/ca-certs
+COPY --from=build-env /src/kafka-http /
+ENTRYPOINT ["/kafka-http"]
