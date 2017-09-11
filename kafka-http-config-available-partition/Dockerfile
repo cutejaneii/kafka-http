@@ -8,6 +8,6 @@ RUN cd /src && CGO_ENABLED=0 GOOS=linux go build -o kafka-http-config
 
 # final stage
 FROM centurylink/ca-certs
-COPY --from=build-env /src/kafka-http /
+COPY --from=build-env /src/kafka-http-config /
 ADD config /
 ENTRYPOINT ["/kafka-http-config"]
