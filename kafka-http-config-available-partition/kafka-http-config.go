@@ -10,8 +10,6 @@ import (
         "net/http"
         "os"
         "strings"
-        "time"
-
         "github.com/Shopify/sarama"
 )
 
