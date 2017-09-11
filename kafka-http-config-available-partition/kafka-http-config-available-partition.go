@@ -91,66 +91,6 @@ func (s *Server) Run(addr string) error {
 //      }
 //}
 
-func KafkaWork(r *http.Request, topic string, topicvalue string) (int32, int64, error) {
-
-        fmt.Print("ABCABCD")
-
-        fmt.Print(brokerList)
-
-        fmt.Print(len(brokerList))
-        fmt.Print("\n" + topic)
-
-        // Add sarama config
-        config := sarama.NewConfig()
-        config.Producer.Return.Successes = true
-        config.Producer.Partitioner = sarama.NewManualPartitioner
-        fmt.Print("\n" + topic)
-
-        client, err2 := sarama.NewClient(brokerList, config)
-
-        WritablePartitions, err3 := client.WritablePartitions(topic)
-
-        fmt.Print(WritablePartitions[0])
-
-        client.RefreshMetadata(topic)
-
-        for i := range WritablePartitions {
-                fmt.Print("\n WritablePartitions: ", WritablePartitions[i])
-        }
-
-        if err2 != nil {
-                log.Printf("Error... " + err2.Error())
-        }
-
-        if err3 != nil {
-                log.Printf("Error... " + err3.Error())
-        }
-
-        producer2, err5 := sarama.NewSyncProducerFromClient(client)
-
-        if err5 != nil {
-                log.Printf("Error... " + err5.Error())
-        }
-
-        // We are not setting a message key, which means that all messages will
-        // be distributed randomly over the different partitions.
-        // 同步傳遞訊息
-        partition, offset, err := producer2.SendMessage(&sarama.ProducerMessage{
-                Partition: 3, //WritablePartitions[index],
-                Topic:     topic,
-                Value:     sarama.StringEncoder(topicvalue),
-        })
-
-        if err != nil {
-                return 0, 0, err
-        }
-
-        producer2.Close()
-        client.Close()
-
-        return partition, offset, err
-}
-
 // Handle everytime when any get any request
 func (s *Server) collectQueryStringData() http.Handler {
         return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
