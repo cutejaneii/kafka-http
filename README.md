@@ -14,8 +14,6 @@ To compile "kafka-http-config.go":
 
 #### Step 2. You can execute directly after compile. ####
 
-
-
 ./kafka-http --brokers=192.168.0.1:9092
 
 ./kafka-http-config
@@ -33,9 +31,17 @@ The kafka broker list need to be given when execute "docker run" command.
 `docker run -d -p 8880:8880 -e KAFKA_PEERS=192.168.0.1:9092 cutejaneii/kafka-http`
 
 
-
 2. [kafka-http-config](https://github.com/cutejaneii/kafka-http/tree/master/kafka-http-config)
 
 Use "config" file to maintain broker list.
 
 `docker run -d -p 8700:8700 cutejaneii/kafka-http`
+
+#### Step 5. How to call API. ####
+Method : POST
+Add Header: Content-Type, application/json
+input:
+`{`
+`"topic":"topic_name",`
+`"value":"hello, world!"`
+`}`
