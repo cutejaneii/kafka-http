@@ -52,3 +52,6 @@ input:
 
 `}`
 
+output:
+
+Success to store one message into [topic_name], partition:1, offset:1
