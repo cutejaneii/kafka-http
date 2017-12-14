@@ -39,9 +39,16 @@ Use "config" file to maintain broker list.
 
 #### Step 5. How to call API. ####
 Method : POST
+
 Add Header: Content-Type, application/json
+
 input:
+
 `{`
+
 `"topic":"topic_name",`
+
 `"value":"hello, world!"`
+
 `}`
+
